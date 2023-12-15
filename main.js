@@ -10,27 +10,43 @@ app.use(express.json());
 app.use(express.static('public'))
 app.use(cors({
     origin: 'http://localhost:3000', // Replace with your frontend's URL    
-    credentials: true, 
+    credentials: true,
 }));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.get('/profile/:nama', async (req, res) => {  
-  let skill = await db.fetchData()
-  console.log(skill)
-  res.render('index', {
-    nama: req.params.nama,
-    skill: skill
-  })
-})
-app.get('/update-skill', (req,res) => {
-    res.render('update-skill')
-})
-app.post('/skill', async (req,res) => {
-    await db.insertData(req.body.skillName, req.body.level)
-    res.send("OK")
+app.get('/profile/:nama', async(req, res) => {
+    let skill = await db.fetchData()
+    console.log(skill)
+    res.render('index', {
+        nama: req.params.nama,
+        skill: skill
+    })
 })
 
+app.get('/update-skill', (req, res) => {
+    res.render('update-skill')
+})
+
+app.post('/skill', async(req, res) => {
+    await db.insertData(req.body.skillName, req.body.level);
+    res.send("OK");
+});
+
+app.put('/skill/:id', async(req, res) => {
+    await db.updateData(req.params.id, req.body.skillName, req.body.level);
+    res.send("OK");
+});
+
+app.delete('/skill/:id', async(req, res) => {
+    if (req.params.id == 0) {
+        await db.deleteAllData();
+    } else {
+        await db.deleteData(req.params.id);
+    }
+    res.send("OK");
+});
+
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+    console.log(`Example app listening on port ${port}`)
 })

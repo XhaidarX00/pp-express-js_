@@ -1,18 +1,25 @@
 <html>
-    <head>
-        <link rel="stylesheet" href="/css/index.css" >
-    </head>
-    <body>
-        <div class="logo">
-            <img src="/img/ex.jpeg" />
-        </div>
-        <div class="nama">
-            <%= nama  %>
+
+<head>
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+
+<body id="index">
+    <div class="logo">
+        <img src="/img/bg.jpg" />
+    </div>
+    <div class="nama">
+        <br>
+        <%= nama  %>
             <ul class="skill">
-            <% skill.forEach(element => { %>
-                <li><%= element.skillName %>:<%= element.level %></li>
-            <% }); %>
+                <% skill.forEach(element => { %>
+                    <li>
+                        <%= element.skillName %> :
+                            <%= element.level %>
+                    </li>
+                    <% }); %>
             </ul>
-        </div>
-    </body>
+    </div>
+</body>
+
 </html>

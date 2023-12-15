@@ -1,13 +1,28 @@
+#index {
+    background-color: #377776;
+}
+
+#uskill {
+    background-color: #377776;
+}
+
+#Ucontainer {
+    text-align: center;
+    margin: 10% 10%;
+}
+
 .logo {
     position: relative;
     margin: 0 auto;
     width: 200px;
     height: 200px;
-    border-radius: 50%;
+    border-radius: 5%;
     overflow: hidden;
+    border-color: black;
+    border-style: double;
 }
 
-.logo > img {
+.logo>img {
     width: 200px;
     height: 200px;
 }
@@ -19,15 +34,26 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+.nama ul li {
+    list-style-type: none;
+}
+
+#crudSelect {
+    padding: 5px;
+    font-size: 16px;
+    text-align: center;
+}
+
 .form-input {
     position: relative;
     margin: 0px auto;
     width: 400px;
-    height: 200px;
-    border: 1px solid #aaa;
+    height: 250px;
+    border: 3px solid #ffffff;
     border-radius: 10px;
-    padding: 5px;
+    padding: 10px;
 }
+
 .form-input input {
     width: 80%;
     padding: 10px;
@@ -45,17 +71,21 @@
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.3s ease;
-  }
+}
 
-  /* Default state */
-  .form-input button {
+
+/* Default state */
+
+.form-input button {
     color: #ffffff;
     background-color: #3498db;
     border: 2px solid #3498db;
-  }
+}
 
-  /* Hover state */
-  .form-input button:hover {
+
+/* Hover state */
+
+.form-input button:hover {
     background-color: #2980b9;
     border-color: #2980b9;
-  }
+}

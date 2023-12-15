@@ -1,7 +1,7 @@
-<link rel="stylesheet" href="/css/index.css" >
+<link rel="stylesheet" href="/css/index.css">
 
 
-<div class="form-input">
+<!-- <div class="form-input">
     <input type="text" placeholder="Skill Name" id="skillName" /> <br/>
     <input type="text" placeholder="level" id="level"/><br/>
     <button id="btn">Input</button>
@@ -37,4 +37,109 @@
         let level = document.getElementById("level").value;
         inputData(skillName, level)
     })
-</script>
+</script> -->
+
+<body id="uskill">
+
+    <div id="Ucontainer">
+
+        <div>
+            <label for="crudSelect"></label>
+            <select id="crudSelect" onchange="toggleCrudForm()">
+        <option value="none">CRUD OPTION</option>
+        <option value="insert">Insert Data</option>
+        <option value="update">Update Data</option>
+        <option value="delete">Delete Data</option>
+    </select>
+        </div>
+
+        <div id="insertForm" class="form-input" style="display: none;">
+            <input type="text" placeholder="Skill Name" id="skillName" /><br/>
+            <input type="text" placeholder="Level" id="level" /><br/>
+            <button id="btnInsert" onclick="insertData()">Input</button>
+        </div>
+
+        <div id="updateForm" class="form-input" style="display: none;">
+            <input type="text" placeholder="Skill ID" id="updateSkillId" /><br/>
+            <input type="text" placeholder="New Skill Name" id="updateSkillName" /><br/>
+            <input type="text" placeholder="New Level" id="updateLevel" /><br/>
+            <button id="btnUpdate" onclick="updateData()">Update</button>
+        </div>
+
+        <div id="deleteForm" class="form-input" style="display: none;">
+            <input type="text" placeholder="Skill ID" id="deleteSkillId" /><br/>
+            <button id="btnDelete" onclick="deleteData()">Delete</button>
+        </div>
+
+        <script>
+            function toggleCrudForm() {
+                const selectedCrud = document.getElementById("crudSelect").value;
+
+                // Hide all forms
+                document.getElementById("insertForm").style.display = "none";
+                document.getElementById("updateForm").style.display = "none";
+                document.getElementById("deleteForm").style.display = "none";
+
+                // Show the selected form
+                if (selectedCrud === "insert") {
+                    document.getElementById("insertForm").style.display = "block";
+                } else if (selectedCrud === "update") {
+                    document.getElementById("updateForm").style.display = "block";
+                } else if (selectedCrud === "delete") {
+                    document.getElementById("deleteForm").style.display = "block";
+                }
+            }
+
+            function insertData() {
+                const skillName = document.getElementById("skillName").value;
+                const level = document.getElementById("level").value;
+                const data = {
+                    skillName,
+                    level
+                };
+
+                sendRequest("POST", "http://localhost:3000/skill", data);
+            }
+
+            function updateData() {
+                const skillId = document.getElementById("updateSkillId").value;
+                const skillName = document.getElementById("updateSkillName").value;
+                const level = document.getElementById("updateLevel").value;
+                const data = {
+                    skillName,
+                    level
+                };
+
+                sendRequest("PUT", `http://localhost:3000/skill/${skillId}`, data);
+            }
+
+            function deleteData() {
+                const skillId = document.getElementById("deleteSkillId").value;
+
+                sendRequest("DELETE", `http://localhost:3000/skill/${skillId}`);
+            }
+
+            function deleteAllData() {
+                const skillId = document.getElementById("deleteAllData").value
+            }
+
+            function sendRequest(method, url, data = null) {
+                const xhr = new XMLHttpRequest();
+                xhr.withCredentials = true;
+
+                xhr.addEventListener("readystatechange", function() {
+                    if (this.readyState === 4) {
+                        console.log(this.responseText);
+                        alert('Sukses');
+                    }
+                });
+
+                xhr.open(method, url);
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.send(data ? JSON.stringify(data) : null);
+            }
+        </script>
+
+    </div>
+
+</body>
